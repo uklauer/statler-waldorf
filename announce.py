@@ -31,7 +31,7 @@ if udate.weekday() == 0 and unow.hour < meeting_time:
 else:
     meeting_date = date.fromtimestamp(time.time() + ((7 - udate.weekday()) * 24 * 60 * 60))
 
-subject = subject_template % uuid.uuid4().hex
+subject = subject_template % uuid.uuid4()
 msg = MIMEText(msg_template % (meeting_date.strftime("%Y-%m-%d"), "%02d:00 UTC" % meeting_time, ""))
 
 msg['Subject'] = subject

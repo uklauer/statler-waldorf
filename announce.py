@@ -23,7 +23,7 @@ This message brought to you by https://github.com/mayhem/statler-waldorf
 Don't even think of responding to this email. We won't answer! http://goo.gl/FSZdF
 ''';
 
-meeting_time = 19 # UTC
+meeting_time = 20 # UTC
 
 unow = datetime.utcnow()
 udate = date(unow.year, unow.month, unow.day)

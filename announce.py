@@ -12,11 +12,12 @@ from email.mime.text import MIMEText
 to = u"MusicBrainz Developer Discussion <musicbrainz-devel@lists.musicbrainz.org>"
 sender = "Statler & Waldorf <noreply@musicbrainz.org>"
 subject_template = u"Dev chat reminder, issue %s"
-msg_template = u'''We've got our weekly dev chat on %s on IRC in #musicbrainz-devel on irc.freenode.net. We're going to meet at Regular Meeting Time [1] (%s).
+msg_template = u'''We've got our weekly dev chat on %s on IRC in #musicbrainz-devel on irc.freenode.net. We're going to meet at Regular Meeting Time [1] (%s) [2].
 
 %sIf there is any topic you would like to discuss during the meeting, please add it to the agenda in the channel topic.
 
 [1] http://musicbrainz.org/doc/Development_Chat
+[2] http://www.timeanddate.com/worldclock/fixedtime.html?iso=%s
 
 --
 This message brought to you by https://github.com/mayhem/statler-waldorf
@@ -35,7 +36,12 @@ else:
 
 id_ = uuid.uuid4()
 subject = subject_template % id_
-msg = MIMEText(msg_template % (meeting_date.strftime("%Y-%m-%d"), "%02d:00 UTC" % meeting_time, ""))
+msg = MIMEText(msg_template % (
+    meeting_date.strftime("%Y-%m-%d"),
+    "%02d:00 UTC" % (meeting_time, ),
+    "",
+    "%sT%02d" % (meeting_date.strftime("%Y%m%d"), meeting_time)
+))
 
 msg['Subject'] = subject
 msg['From'] = sender

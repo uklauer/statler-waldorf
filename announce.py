@@ -18,7 +18,7 @@ msg_template = u'''We've got our weekly dev chat on %s on IRC in #musicbrainz-de
 
 [1] http://musicbrainz.org/doc/Development_Chat
 
---
+-- ''' '''
 This message brought to you by https://github.com/mayhem/statler-waldorf
 Don't even think of responding to this email. We won't answer! http://goo.gl/FSZdF
 ''';

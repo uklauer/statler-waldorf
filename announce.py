@@ -23,7 +23,7 @@ This message brought to you by https://github.com/mayhem/statler-waldorf
 Don't even think of responding to this email. We won't answer! http://goo.gl/FSZdF
 ''';
 
-meeting_time = 20 # UTC
+meeting_time = 20 # UTC; standard time in Europe
 
 unow = datetime.utcnow()
 udate = date(unow.year, unow.month, unow.day)
@@ -32,6 +32,14 @@ if udate.weekday() == 0 and unow.hour < meeting_time:
     meeting_date = udate
 else:
     meeting_date = date.fromtimestamp(time.time() + ((7 - udate.weekday()) * 24 * 60 * 60))
+
+if meeting_date.month > 3 and meeting_date.month < 10:
+    meeting_time = 19 # daylight saving time in Europe
+elif meeting_date.month == 3 or meeting_date.month == 10:
+    is_after_shift = (meeting_date.day - (meeting_date.weekday() + 1) % 7 > 31 - 7)
+    # shift to and from DST occurs in Europe on the last Sunday in March and October, respectively
+    if (meeting_date.month == 3 and is_after_shift) or (meeting_date.month == 10 and not is_after_shift):
+        meeting_time = 19
 
 id_ = uuid.uuid4()
 subject = subject_template % id_
